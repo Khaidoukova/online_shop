@@ -1,1 +1,47 @@
-[{"model": "catalog.product", "pk": 1, "fields": {"name": "Апельсины", "description": "Крупные апельсины из стран наших стратегических друзей и партнеров", "preview": "", "category": "Фрукты", "price": 200, "creation_date": "2023-08-01T12:18:14Z", "change_date": "2023-08-01T12:18:27Z"}}, {"model": "catalog.category", "pk": 1, "fields": {"name": "Фрукты", "description": "Свежие фрукты из России и зарубежых стран"}}, {"model": "catalog.category", "pk": 2, "fields": {"name": "Овощи", "description": "Свежие овощиы из России и зарубежых стран"}}, {"model": "catalog.category", "pk": 5, "fields": {"name": "Молочные продукты", "description": "Молочные продукты местных производителей"}}, {"model": "catalog.category", "pk": 6, "fields": {"name": "Мясо", "description": "Свежее мясо и мясные продукты от местных производителей"}}]
+[
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "Апельсины",
+      "description": "Крупные апельсины из стран наших стратегических друзей и партнеров",
+      "preview": "",
+      "category": "Фрукты",
+      "price": 200,
+      "creation_date": "2023-08-01T12:18:14Z",
+      "change_date": "2023-08-01T12:18:27Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Фрукты",
+      "description": "Свежие фрукты из России и зарубежых стран"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Овощи",
+      "description": "Свежие овощиы из России и зарубежых стран"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+      "name": "Молочные продукты",
+      "description": "Молочные продукты местных производителей"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+      "name": "Мясо",
+      "description": "Свежее мясо и мясные продукты от местных производителей"
+    }
+  }
+]
