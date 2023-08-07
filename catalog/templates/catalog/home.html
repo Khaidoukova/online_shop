@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,7 +22,31 @@
     <p class="lead">Skystore - это отличный вариант хранения ваших плагинов и примеров кода, который вы бы хотели
         продать</p>
 </div>
+<div class="album py-5 bg-light">
+        <div class="container">
 
+<div class="row">
+            {% for object in object_list %}
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+
+                <div class="card-body">
+                  <p class="card-text">{{ object }}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted"></small>
+                  </div>
+                </div>
+              </div>
+            </div>
+           {% endfor %}
+
+          </div>
+            </div>
+    </div>
 <div class="container">
     <div class="row text-center">
         <div class="col-3">

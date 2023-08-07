@@ -12,7 +12,7 @@ class Product(models.Model):
 
 
     def __str__(self):
-        return f'{self.name}, {self.category}, {self.price} rub'
+        return f'{self.name}, {self.category}, {self.price} руб/кг.'
 
     class Meta:
         verbose_name = "товар"

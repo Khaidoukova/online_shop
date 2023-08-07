@@ -8,8 +8,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         Category.objects.all().delete()
         data = [{'name': 'Бакалея', 'description': 'список товаров в этой категории'},
-                 {'name': 'Выпечка', 'description': 'список свежей выпечки'},
-                 {'name': 'Готовые блюда', 'description': 'Список свежих готовых блюд'},]
+                {'name': 'Овощи', 'description': 'список товаров в этой категории'},
+                {'name': 'Фрукты', 'description': 'список товаров в этой категории'},
+                {'name': 'Выпечка', 'description': 'список свежей выпечки'},
+                {'name': 'Готовые блюда', 'description': 'Список свежих готовых блюд'},]
 
         with connection.cursor() as cursor:
             cursor.execute("ALTER SEQUENCE catalog_product_id_seq RESTART WITH 1")

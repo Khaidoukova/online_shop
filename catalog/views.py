@@ -1,12 +1,16 @@
 from django.shortcuts import render
-from catalog.models import Category
+from catalog.models import Product
 
 def home(request):
-    return render(request, 'catalog/home.html')
+    index_list = Product.objects.all()
+    context = {
+        'object_list': index_list
+    }
+    return render(request, 'catalog/home.html', context)
 
 
 def index(request):
-    index_list = Category.objects.all()
+    index_list = Product.objects.all()
     context = {
         'object_list': index_list
     }
