@@ -2,36 +2,44 @@
 
 {% block content%}
 
-<div class="row text-left">
-
-        <div>
-            <h1>Добавьте свои продукты</h1>
+<div class="col-lg-6 col-sm-12">
+    <div class="card mb-4 box-shadow">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Добавить продукт</h4>
         </div>
+        <div class="card-body">
+            <form method="post" action="" class="form-floating">
+                {% csrf_token %}
 
-        <form method="post" action="" class="form-floating">
-            {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name">Название продукта</label>
+                    <input type="text" name="name" class="form-control" placeholder="Название" required>
+                </div>
 
-            <div class="mb-3">
-                <label for="name">Название продукта</label>
-                <input type="text" name="name" class="form-control" id="name" placeholder="Ваше имя" required>
-            </div>
+                <div class="mb-3">
+                    <label for="name">Описание продукта</label>
+                    <input type="text" name="description" class="form-control" placeholder="Информация о продукте"
+                           required>
+                </div>
 
-            <div class="mb-3">
-                <label for="name">Описание продукта</label>
-                <input type="text" name="description" class="form-control" id="name" placeholder="Немного, сколько сможете" required>
-            </div>
+                <div class="mb-3">
+                    <label for="name">Категория</label>
+                    <input type="text" name="category" class="form-control"
+                           placeholder="Категория (бакалея, овощи, фрукты, готовая продукция)" required>
+                </div>
 
-             <div class="mb-3">
-                <label for="name">Категория</label>
-                <input type="text" name="category" class="form-control" id="name" placeholder="Хлеб, овощи, фрукты и пр" required>
-            </div>
+                <div class="mb-3">
+                    <label for="name">Цена</label>
+                    <input type="text" name="price" class="form-control" id="name" placeholder="Цена за кг" required>
+                </div>
 
-             <div class="mb-3">
-                <label for="name">Цена в уе</label>
-                <input type="text" name="price" class="form-control" id="name" placeholder="Адекватно пожалуйста" required>
-            </div>
 
-            <button type="submit" class="btn btn-lg btn-block btn-outline-primary">Добавить продукт</button>
-        </form>
 
+                <button type="submit" class="btn btn-lg btn-block btn-outline-primary">Добавить продукт</button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
 {% endblock %}

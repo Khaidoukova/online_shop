@@ -11,8 +11,8 @@ def home(request):
     return render(request, 'catalog/home.html', context)
 
 
-def product(request, product_id):
-    product_info = get_object_or_404(Product, pk=product_id)
+def product(request, pk):
+    product_info = get_object_or_404(Product, pk=pk)
     return render(request, 'catalog/product.html', {'product': product_info})
 
 
@@ -40,6 +40,13 @@ def add_product(request):
             'change_date': request.POST.get('change_date')
 
         }
+        product_to_add.append(Product(**product))
+        Product.objects.bulk_create(product_to_add)
+
+    return render(request, 'catalog/add_product.html')
+
+
+
 
 
 

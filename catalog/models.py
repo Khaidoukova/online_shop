@@ -7,8 +7,8 @@ class Product(models.Model):
     preview = models.ImageField(upload_to='products/', verbose_name='изображение', **NULLABLE)
     category = models.CharField(max_length=100, verbose_name='категория')
     price = models.IntegerField(verbose_name='цена')
-    creation_date = models.DateTimeField(verbose_name='дата создания', **NULLABLE)
-    change_date = models.DateTimeField(verbose_name='дата последнего изменения', **NULLABLE)
+    creation_date = models.DateTimeField(auto_now_add=True, verbose_name='дата создания')
+    change_date = models.DateTimeField(auto_now=True, verbose_name='дата последнего изменения')
 
 
     def __str__(self):
