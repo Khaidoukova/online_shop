@@ -1,19 +1,19 @@
 {% extends 'catalog/base.html' %}
-{% load filters %}
+{% load mediapath %}
 {% block content%}
 
     <div class="container">
         <div class="row">
             <!-- Левая часть с изображением -->
             <div class="col-md-4">
-                <img src="{{ object.image | mediapath_filter }}">
+                <img src="{% mediapath object.image %}" />
             </div>
 
             <!-- Правая часть с информацией о товаре -->
             <div class="col-md-8">
-                <h2>{{ object.title }}</h2>
-                <p>Описание товара: {{ object.description }}</p>
-                <p>Цена: {{ object.price }} руб.</p>
+                <h2>{{ product.name }}</h2>
+                <p>Описание товара: {{ product.description }}</p>
+                <p>Цена: {{ product.price }} руб.</p>
                 <button class="btn btn-primary">Положить в корзину</button>
             </div>
 
