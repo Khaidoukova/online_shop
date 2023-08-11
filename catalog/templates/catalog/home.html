@@ -2,35 +2,36 @@
 {% load mediapath %}
 {% block content %}
 
-    <p class="lead">Skystore - это отличный вариант хранения ваших плагинов и примеров кода, который вы бы хотели
-        продать. А также сервис по заказу продуктов и готовой еды.</p>
-</div>
+<p class="lead">Skystore - это отличный вариант хранения ваших плагинов и примеров кода, который вы бы хотели
+    продать. А также сервис по заказу продуктов и готовой еды.</p>
 <div class="album py-5 bg-light">
     <div class="container">
 
         <div class="row">
             {% for object in object_list %}
             <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
+                <div class="card mb-4 box-shadow">
 
-                <div class="card-body">
-                  <p class="card-text">{{ object }}</p>
-                    <p class="card-text">
+                    <div class="card-body">
+                        <p class="card-text">{{ object }}</p>
+                        <p class="card-text">
                             {{ object.description|truncatechars:50 }}
-                    </p>
-                    <img src="{% mediapath object.preview %}" />
+                        </p>
+                        <img src="{% mediapath object.preview %}"/>
 
 
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <a href="{% url 'catalog:product' object.id %}" class="btn btn-primary">Купить</a>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="{% url 'catalog:product' object.id %}" class="btn btn-primary">Купить</a>
 
+                            </div>
+
+                        </div>
                     </div>
-
-                  </div>
                 </div>
-              </div>
             </div>
-           {% endfor %}
-{% endblock %}
-
+            {% endfor %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
