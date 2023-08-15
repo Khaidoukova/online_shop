@@ -22,6 +22,11 @@
                     <a href="{% url 'blog:delete' object.pk %}"
                        class="btn btn-sm btn-outline-danger">Удалить</a>
                 </div>
+                {% if object.is_active %}
+                    <a class='btn btn-warning' href="{% url 'blog:toggle_activity' object.pk %}">Снять с публикации</a>
+                {% else %}
+                    <a class='btn btn-success' href="{% url 'blog:toggle_activity' object.pk %}">Опубликовать</a>
+                {% endif %}
             </div>
         </div>
     </div>

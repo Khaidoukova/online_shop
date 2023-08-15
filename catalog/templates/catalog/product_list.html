@@ -2,8 +2,7 @@
 {% load mediapath %}
 {% block content %}
 
-<p class="lead">Skystore - это отличный вариант хранения ваших плагинов и примеров кода, который вы бы хотели
-    продать. А также сервис по заказу продуктов и готовой еды.</p>
+<p class="lead">Деловой центр Астор - лучшее место для роста и процветания Вашего бизнеса.</p>
 <div class="album py-5 bg-light">
     <div class="container">
 
@@ -17,12 +16,14 @@
                         <p class="card-text">
                             {{ object.description|truncatechars:50 }}
                         </p>
-                        <img src="{% mediapath object.preview %}"/>
+                        <img src="{% mediapath object.preview %}" width="100" height="111">
 
 
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="{% url 'catalog:product_detail' object.id %}" class="btn btn-primary">Купить</a>
+                                <a href="{% url 'catalog:product_detail' object.id %}" class="p-2 btn btn-outline-primary">Купить</a>
+                                <a href="{% url 'catalog:product_update' object.id %}" class="p-2 btn btn-outline-primary">Изменить</a>
+                                <a href="{% url 'catalog:product_confirm_delete' object.id %}" class="p-2 btn btn-outline-primary">Удалить</a>
 
                             </div>
 
