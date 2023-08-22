@@ -1,7 +1,9 @@
 {% extends 'catalog/base.html' %}
 {% load mediapath %}
 {% block content %}
-
+    <div class="col-12 mb-5" >
+        <a class="btn btn-outline-primary" href="{% url 'catalog:product_form' %}">Добавить продукт</a>
+    </div>
 <p class="lead">Деловой центр Астор - лучшее место для роста и процветания Вашего бизнеса.</p>
 <div class="album py-5 bg-light">
     <div class="container">
