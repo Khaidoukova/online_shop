@@ -4,7 +4,7 @@
     <div class="col-12 mb-5" >
         <a class="btn btn-outline-primary" href="{% url 'catalog:product_form' %}">Добавить продукт</a>
     </div>
-<p class="lead">Деловой центр Астор - лучшее место для роста и процветания Вашего бизнеса.</p>
+
 <div class="album py-5 bg-light">
     <div class="container">
 
@@ -15,6 +15,10 @@
 
                     <div class="card-body">
                         <p class="card-text">{{ object }}</p>
+                        {% if object.active_version %}
+                <p>Версия: {{ product.active_version_number }}<br>
+                    {{ product.active_version_name }}</p>
+                {% endif %}
                         <p class="card-text">
                             {{ object.description|truncatechars:50 }}
                         </p>
