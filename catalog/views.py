@@ -1,20 +1,19 @@
+
 from django.shortcuts import render
-from catalog.models import Product
+from django.urls import reverse_lazy
 
-def home(request):
-    index_list = Product.objects.all()
-    context = {
-        'object_list': index_list
-    }
-    return render(request, 'catalog/home.html', context)
+from catalog.forms import ProductForm, VersionForm
+from catalog.models import Product, Version
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
-def index(request):
-    index_list = Product.objects.all()
-    context = {
-        'object_list': index_list
-    }
-    return render(request, 'catalog/index.html', context)
+class ProductListView(ListView):
+    model = Product
+
+
+class ProductDetailView(DetailView):
+    model = Product
+
 
 
 def contacts(request):
@@ -23,8 +22,31 @@ def contacts(request):
         phone_number = request.POST.get('phone_number')
         message = request.POST.get('message')
         print(f"Имя: {name}, Телефон: {phone_number}, Сообщение: {message}")
+    context = {
+        'title': 'Контакты',
+    }
 
-    return render(request, 'catalog/contacts.html')
+    return render(request, 'catalog/contacts.html', context)
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    #fields = ('name', 'description', 'category', 'price', 'preview')
+    success_url = reverse_lazy('catalog:product_list')
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    # fields = ('name', 'description', 'category', 'price', 'preview')
+    success_url = reverse_lazy('catalog:product_form')
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy('catalog:home')
+
 
 
 

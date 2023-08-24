@@ -1,0 +1,44 @@
+{% extends 'catalog/base.html' %}
+{% load mediapath %}
+{% block content %}
+    <div class="col-12 mb-5" >
+        <a class="btn btn-outline-primary" href="{% url 'catalog:product_form' %}">Добавить продукт</a>
+    </div>
+
+<div class="album py-5 bg-light">
+    <div class="container">
+
+        <div class="row">
+            {% for object in object_list %}
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+
+                    <div class="card-body">
+                        <p class="card-text">{{ object }}</p>
+                        {% if object.active_version %}
+                <p>Версия: {{ product.active_version_number }}<br>
+                    {{ product.active_version_name }}</p>
+                {% endif %}
+                        <p class="card-text">
+                            {{ object.description|truncatechars:50 }}
+                        </p>
+                        <img src="{% mediapath object.preview %}" width="100" height="111">
+
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="{% url 'catalog:product_detail' object.id %}" class="p-2 btn btn-outline-primary">Купить</a>
+                                <a href="{% url 'catalog:product_update' object.id %}" class="p-2 btn btn-outline-primary">Изменить</a>
+                                <a href="{% url 'catalog:product_confirm_delete' object.id %}" class="p-2 btn btn-outline-primary">Удалить</a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
