@@ -10,6 +10,22 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 class ProductListView(ListView):
     model = Product
 
+    def get_queryset(self):
+        queryset = Product.objects.order_by('-creation_date')[:6]
+        return queryset
+
+    def get_context_data(self, *args, **kwargs):
+        context_data = super().get_context_data(*args, **kwargs)
+        for product in context_data['object_list']:
+            active_version = Version.objects.filter(product=product, is_active=True).last()
+            if active_version:
+                product.active_version_number = active_version.version
+                product.active_version_name = active_version.version_name
+            else:
+                product.active_version_number = None
+                product.active_version_name = None
+        return context_data
+
 
 class ProductDetailView(DetailView):
     model = Product
