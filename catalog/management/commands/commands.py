@@ -16,6 +16,7 @@ class Command(BaseCommand):
         with connection.cursor() as cursor:
             cursor.execute("ALTER SEQUENCE catalog_product_id_seq RESTART WITH 1")
             cursor.execute("ALTER SEQUENCE catalog_category_id_seq RESTART WITH 1")
+            cursor.execute("ALTER SEQUENCE catalog_version_id_seq RESTART WITH 1")
 
         new_data = []
         for item in data:

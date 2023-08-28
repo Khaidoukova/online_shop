@@ -31,7 +31,6 @@ class ProductDetailView(DetailView):
     model = Product
 
 
-
 def contacts(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -48,7 +47,7 @@ def contacts(request):
 class ProductCreateView(CreateView):
     model = Product
     form_class = ProductForm
-    #fields = ('name', 'description', 'category', 'price', 'preview')
+    # fields = ('name', 'description', 'category', 'price', 'preview')
     success_url = reverse_lazy('catalog:product_list')
 
 
@@ -62,7 +61,3 @@ class ProductUpdateView(UpdateView):
 class ProductDeleteView(DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:home')
-
-
-
-

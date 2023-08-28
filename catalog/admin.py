@@ -22,4 +22,3 @@ class VersionAdmin(admin.ModelAdmin):
     list_display = ('id', 'product', 'version', 'version_name', 'is_active')
     list_display_links = ('version', 'version_name',)
     list_editable = ('is_active',)
-
