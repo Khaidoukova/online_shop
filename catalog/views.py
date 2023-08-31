@@ -1,6 +1,6 @@
 
-from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy, reverse
 
 from catalog.forms import ProductForm, VersionForm
 from catalog.models import Product, Version
@@ -59,3 +59,15 @@ class ProductUpdateView(UpdateView):
 class ProductDeleteView(DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:home')
+
+
+def toggle_activity(request, pk):
+    product_item = get_object_or_404(Product, pk=pk)
+    if product_item.is_active:
+        product_item.is_active = False
+    else:
+        product_item.is_active = True
+
+    product_item.save()
+
+    return redirect(reverse('home'))

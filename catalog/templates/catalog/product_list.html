@@ -2,10 +2,9 @@
 {% load mediapath %}
 {% block content %}
 <div class="col-12 mb-5">
-    {% if user.is_authenticated %}
+    {% if perms.catalog.add_product %}
     <a class="btn btn-outline-primary" href="{% url 'catalog:product_form' %}">Добавить продукт</a>
-  {% else %}
-    <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">Добавить продукт</a>
+
   {% endif %}
 </div>
 
@@ -55,13 +54,13 @@
                                 <a href="{% url 'users:login' %}"
                                 class="p-2 btn btn-outline-primary">Изменить</a>
                                 {% endif %}
-                                {% if user.is_authenticated %}
+                                {% if user.is_superuser %}
                                 <a href="{% url 'catalog:product_confirm_delete' object.id %}"
                                    class="p-2 btn btn-outline-primary">Удалить</a>
-                                {% else %}
-                                <a href="{% url 'users:login' %}"
-                                class="p-2 btn btn-outline-primary">Удалить</a>
+
                                 {% endif %}
+
+
 
                             </div>
 

@@ -1,4 +1,6 @@
 from django.db import models
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse
 
 from users.models import User
 
@@ -27,6 +29,7 @@ class Product(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True, verbose_name='дата создания')
     change_date = models.DateTimeField(auto_now=True, verbose_name='дата последнего изменения')
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name='автор', **NULLABLE)
+    is_active = models.BooleanField(default=False, verbose_name='опубликован')
 
     def __str__(self):
         return f'{self.name}, {self.category}, {self.price} руб/кг'
@@ -34,6 +37,12 @@ class Product(models.Model):
     class Meta:
         verbose_name = "товар"
         verbose_name_plural = "товары"
+        permissions = [
+            (
+                "set_active_status",
+                "Can activate product"
+            )
+        ]
 
 
 class Version(models.Model):
@@ -48,3 +57,14 @@ class Version(models.Model):
     class Meta:
         verbose_name = "версия"
         verbose_name_plural = "версии"
+
+def toggle_activity(request, pk):
+    product_item = get_object_or_404(Product, pk=pk)
+    if product_item.is_active:
+        product_item.is_active = False
+    else:
+        product_item.is_active = True
+
+    product_item.save()
+
+    return redirect(reverse('home'))

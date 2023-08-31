@@ -78,3 +78,5 @@ def generate_password(request):
     )
     return redirect(reverse_lazy('users:login'))
 
+
+
