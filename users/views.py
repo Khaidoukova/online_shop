@@ -2,6 +2,8 @@ import random
 import string
 
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
@@ -13,7 +15,7 @@ from users.forms import UserRegisterForm, UserForm
 from users.models import User
 
 
-class UserUpdateView(UpdateView):
+class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     success_url = reverse_lazy('users:profile')
     form_class = UserForm
@@ -66,6 +68,7 @@ def verify_email(request, key):
     return redirect('users:login')
 
 
+@login_required
 def generate_password(request):
     new_password = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
     request.user.set_password(new_password)

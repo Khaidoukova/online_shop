@@ -1,4 +1,4 @@
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 
@@ -11,7 +11,12 @@ class ProductListView(ListView):
     model = Product
 
     def get_queryset(self):
-        queryset = Product.objects.order_by('-creation_date')[:6]
+        user = self.request.user
+        if user.is_staff or user.is_superuser:
+            queryset = super().get_queryset()
+        else:
+            queryset = super().get_queryset().filter(is_active=True)
+
         return queryset
 
     def get_context_data(self, *args, **kwargs):
@@ -54,20 +59,23 @@ class ProductUpdateView(UpdateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:product_form')
+    permission_required = 'catalog.change_product'
+
+    def test_func(self):
+        user = self.request.user
+        product = self.get_object()
+
+        if product.owner == user or user.is_staff or user.is_superuser:
+            return True
+        else:
+            return False
+    def handle_no_permissions(self):
+        return redirect(reverse_lazy('product_list'))
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:home')
 
 
-def toggle_activity(request, pk):
-    product_item = get_object_or_404(Product, pk=pk)
-    if product_item.is_active:
-        product_item.is_active = False
-    else:
-        product_item.is_active = True
 
-    product_item.save()
-
-    return redirect(reverse('home'))

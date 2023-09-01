@@ -38,10 +38,9 @@ class Product(models.Model):
         verbose_name = "товар"
         verbose_name_plural = "товары"
         permissions = [
-            (
-                "set_active_status",
-                "Can activate product"
-            )
+            ("set_active_status", "Can activate product"),
+            ("change_product_description", "Can change product description"),
+            ('change_product_category', 'Can change product category'),
         ]
 
 

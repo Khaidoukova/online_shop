@@ -3,6 +3,7 @@ from catalog.models import Product, Version
 
 forbidden_words = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
 
+
 class StyleFormMixin:
 
     def __init__(self, *args, **kwargs):
@@ -12,8 +13,8 @@ class StyleFormMixin:
 
 
 class ProductForm(StyleFormMixin, forms.ModelForm):
-
     version = forms.ModelChoiceField(queryset=Version.objects.all(), empty_label=None, label='Версия продукта')
+
     class Meta:
         model = Product
         fields = ('name', 'description', 'category', 'price', 'preview')
@@ -35,12 +36,19 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
         return cleaned_data
 
 
+class VersionForm(StyleFormMixin, forms.ModelForm):
+    class Meta:
+        model = Version
+        fields = '__all__'
+
 
 class VersionForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Version
         fields = '__all__'
-class VersionForm(StyleFormMixin, forms.ModelForm):
+
+
+class ProductModeratorForm(StyleFormMixin, forms.ModelForm):
     class Meta:
-        model = Version
-        fields = '__all__'
+        model = Product
+        fields = ('name', 'description', 'category', 'is_active',)
