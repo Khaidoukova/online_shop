@@ -1,0 +1,45 @@
+{% extends 'catalog/base.html' %}
+
+{% block content%}
+
+<div class="col-lg-6 col-sm-12">
+    <div class="card mb-4 box-shadow">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Добавить продукт</h4>
+        </div>
+        <div class="card-body">
+            <form method="post" action="" class="form-floating">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="name">Название продукта</label>
+                    <input type="text" name="name" class="form-control" placeholder="Название" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="name">Описание продукта</label>
+                    <input type="text" name="description" class="form-control" placeholder="Информация о продукте"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="name">Категория</label>
+                    <input type="text" name="category" class="form-control"
+                           placeholder="Категория (бакалея, овощи, фрукты, готовая продукция)" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="name">Цена</label>
+                    <input type="text" name="price" class="form-control" id="name" placeholder="Цена за кг" required>
+                </div>
+
+
+
+                <button type="submit" class="btn btn-lg btn-block btn-outline-primary">Добавить продукт</button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}

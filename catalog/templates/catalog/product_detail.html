@@ -1,0 +1,46 @@
+{% extends 'catalog/base.html' %}
+
+{% block content%}
+
+    <div class="container">
+        <div class="row">
+            <!-- Левая часть с изображением -->
+            <div class="col-md-4">
+                <img src="/media/{{ product.preview }}/" width="500" height="555">
+            </div>
+
+            <!-- Правая часть с информацией о товаре -->
+            <div class="col-md-8">
+                <h2>{{ product.name }}</h2>
+                <p>Описание товара: {{ product.description }}</p>
+                <p>Цена: {{ product.price }} руб.</p>
+                <p>Создатель: {{ product.owner }} </p>
+                <div class="">
+
+                        {% if perms.catalog.change_product or object.owner == user %}
+                        <a href="{% url 'catalog:product_update' object.id %}" type="button" class="btn btn-outline-primary">изменить</a>
+                        {% endif %}
+                        {% if perms.catalog.delete_product %}
+                        <a href="{% url 'catalog:product_confirm_delete' object.id %}" type="button" class="btn btn-outline-primary">удалить</a>
+                        {% endif %}
+
+                    </div>
+
+                <div class="card-footer">
+                            {% if object.active_version_name %}
+                            <p>Номер активной версии: {{ object.active_version_number }}<br>
+                                Название: {{ object.active_version_name }}</p>
+                            {% else %}
+                            <p>Номер активной версии: отсутствует <br>
+                                Название: отсутствует </p>
+                            {% endif %}
+                        </div>
+
+
+                <button class="btn btn-primary">Положить в корзину</button>
+            </div>
+<div class="col-6">
+
+        </div>
+    </div>
+{% endblock %}
