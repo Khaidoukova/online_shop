@@ -1,8 +1,8 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 
-from catalog.forms import ProductForm, VersionForm
+from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
 from catalog.models import Product, Version
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -15,7 +15,7 @@ class ProductListView(ListView):
         if user.is_staff or user.is_superuser:
             queryset = super().get_queryset()
         else:
-            queryset = super().get_queryset().filter(is_active=True)
+            queryset = super().get_queryset().filter(status=Product.STATUS_PUBLISHED)
 
         return queryset
 
@@ -54,28 +54,38 @@ class ProductCreateView(CreateView):
     form_class = ProductForm
     success_url = reverse_lazy('catalog:product_form')
 
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.owner = self.request.user
+        self.object.save()
 
-class ProductUpdateView(UpdateView):
+        return super().form_valid(form)
+
+
+class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Product
-    form_class = ProductForm
-    success_url = reverse_lazy('catalog:product_form')
+    form_class = ProductModeratorForm
+    success_url = reverse_lazy('catalog:home')
     permission_required = 'catalog.change_product'
 
     def test_func(self):
         user = self.request.user
         product = self.get_object()
 
-        if product.owner == user or user.is_staff or user.is_superuser:
+        if product.owner == user or user.is_staff:
             return True
         else:
             return False
+
+
     def handle_no_permissions(self):
         return redirect(reverse_lazy('product_list'))
 
 
-class ProductDeleteView(LoginRequiredMixin, DeleteView):
+class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:home')
+    permission_required = 'catalog.delete_product'
 
 
 

@@ -14,8 +14,7 @@ class StyleFormMixin:
 
 class ProductForm(StyleFormMixin, forms.ModelForm):
     version = forms.ModelChoiceField(queryset=Version.objects.all(), empty_label=None, label='Версия продукта')
-    is_active = forms.BooleanField(label='Опубликовано', required=False,
-                                   widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
+
 
     class Meta:
         model = Product
@@ -53,4 +52,5 @@ class VersionForm(StyleFormMixin, forms.ModelForm):
 class ProductModeratorForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
-        fields = ('name', 'description', 'category', 'is_active',)
+        fields = ('name', 'description', 'category', 'status',)
+
