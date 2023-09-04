@@ -15,6 +15,16 @@
                 <p>Описание товара: {{ product.description }}</p>
                 <p>Цена: {{ product.price }} руб.</p>
                 <p>Создатель: {{ product.owner }} </p>
+                <div class="">
+
+                        {% if perms.catalog.change_product or object.owner == user %}
+                        <a href="{% url 'catalog:product_update' object.id %}" type="button" class="btn btn-outline-primary">изменить</a>
+                        {% endif %}
+                        {% if perms.catalog.delete_product %}
+                        <a href="{% url 'catalog:product_confirm_delete' object.id %}" type="button" class="btn btn-outline-primary">удалить</a>
+                        {% endif %}
+
+                    </div>
 
                 <div class="card-footer">
                             {% if object.active_version_name %}
