@@ -52,7 +52,7 @@ def contacts(request):
 class ProductCreateView(CreateView):
     model = Product
     form_class = ProductForm
-    success_url = reverse_lazy('catalog:product_form')
+    success_url = reverse_lazy('catalog:home')
 
     def form_valid(self, form):
         self.object = form.save()

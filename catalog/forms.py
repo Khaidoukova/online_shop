@@ -15,7 +15,6 @@ class StyleFormMixin:
 class ProductForm(StyleFormMixin, forms.ModelForm):
     version = forms.ModelChoiceField(queryset=Version.objects.all(), empty_label=None, label='Версия продукта')
 
-
     class Meta:
         model = Product
         fields = ('name', 'description', 'category', 'price', 'preview')
