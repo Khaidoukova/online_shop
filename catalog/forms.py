@@ -13,7 +13,7 @@ class StyleFormMixin:
 
 
 class ProductForm(StyleFormMixin, forms.ModelForm):
-    version = forms.ModelChoiceField(queryset=Version.objects.all(), empty_label=None, label='Версия продукта')
+    #version = forms.ModelChoiceField(queryset=Version.objects.all(), empty_label=None, label='Версия продукта')
 
     class Meta:
         model = Product
@@ -34,12 +34,6 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
             raise forms.ValidationError('Вы вводите запрещенные слова')
 
         return cleaned_data
-
-
-class VersionForm(StyleFormMixin, forms.ModelForm):
-    class Meta:
-        model = Version
-        fields = '__all__'
 
 
 class VersionForm(StyleFormMixin, forms.ModelForm):
