@@ -30,6 +30,7 @@ sitemaps = {
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('django-check-seo/', include('django_check_seo.urls')),
     path('sitemap.xml/', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
     path('', include('catalog.urls', namespace='catalog')),
